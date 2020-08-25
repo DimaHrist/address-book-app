@@ -7,13 +7,13 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
 
 // Components
 import {
   ListComponent,
   AddComponent
 } from './components';
-
 
 @NgModule({
   declarations: [AddComponent, ListComponent],
@@ -25,7 +25,8 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
   ]
 })
 export class AddressBookModule { }
