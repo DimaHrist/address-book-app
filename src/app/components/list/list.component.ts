@@ -1,21 +1,19 @@
 // Modules
-import {Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
+import { Component } from '@angular/core';
 
 // Services
-import {ApiService} from '../../services/api.service';
-import {FormControl, FormGroup} from '@angular/forms';
+import { ApiService } from '../../services/api.service';
 
 // Interfaces
-import {IRequest} from '../../interfaces/request-interface';
-import {MatTableDataSource} from '@angular/material/table';
+import { IRequest } from '../../interfaces/request-interface';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   // Array for table
   public dataSource = new MatTableDataSource<IRequest>([]);
@@ -32,7 +30,6 @@ export class ListComponent implements OnInit {
 
   constructor(
     private readonly apiService: ApiService,
-    private readonly cdr: ChangeDetectorRef
   ) {
   }
 
@@ -53,9 +50,6 @@ export class ListComponent implements OnInit {
     this.apiService.deleteItem(id).subscribe((data) => {
       this.dataSource = new MatTableDataSource<IRequest>(data);
     });
-  }
-
-  ngOnInit(): void {
   }
 
 }

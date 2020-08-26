@@ -26,7 +26,7 @@ export class ApiService {
 
   public rateItem(value: boolean, id: number): Observable<any> {
     const test = this.dataSource.find((item) => {
-      return this.dataSource.indexOf(item) === id
+      return this.dataSource.indexOf(item) === id;
     });
     if (value) {
       this.dataSource.unshift({...test, rate: value});

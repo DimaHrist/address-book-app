@@ -1,14 +1,13 @@
 // Modules
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-// import * as Inputmask from 'inputmask/dist/inputmask.js';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import * as Inputmask from 'inputmask';
 
 // Services
-import {ApiService} from '../../services/api.service';
+import { ApiService } from '../../services/api.service';
 
 // Interfaces
-import {IRequest} from '../../interfaces/request-interface';
+import { IRequest } from '../../interfaces/request-interface';
 
 @Component({
   selector: 'app-add',
