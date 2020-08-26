@@ -17,6 +17,7 @@ export class AddComponent implements OnInit {
 
   @Output() dataSourceChange = new EventEmitter<IRequest[]>();
 
+  // Create form
   public form = new FormGroup({
     lastName: new FormControl(null, Validators.required),
     firstName: new FormControl(),
@@ -32,14 +33,14 @@ export class AddComponent implements OnInit {
   // Add item method
   public addItem(): void {
     const request: IRequest = {
+      rate: false,
       last_name: this.form.controls.lastName.value,
       first_name: this.form.controls.firstName.value,
       patronymic: this.form.controls.patronymic.value,
       phone: this.form.controls.phone.value
     };
 
-    this.apiService.addItem(request).subscribe((data) => {
-      console.log(data);
+    this.apiService.addItem(request).subscribe((data: IRequest[]) => {
       this.dataSourceChange.emit(data);
       this.form.reset();
     });
