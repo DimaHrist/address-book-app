@@ -1,6 +1,8 @@
 // Modules
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+// import * as Inputmask from 'inputmask/dist/inputmask.js';
+import * as Inputmask from 'inputmask';
 
 // Services
 import {ApiService} from '../../services/api.service';
@@ -19,16 +21,22 @@ export class AddComponent implements OnInit {
 
   // Create form
   public form = new FormGroup({
-    lastName: new FormControl(null, Validators.required),
+    lastName: new FormControl(null, [Validators.required]),
     firstName: new FormControl(),
     patronymic: new FormControl(),
-    phone: new FormControl(null, Validators.required)
+    phone: new FormControl(null, [
+      Validators.required,
+      // Validators.pattern('^((\\\\+91-?)|0)?[0-9]{10}$')
+      Validators.pattern('^\\+[7]\\([0-9][0-9][0-9]\\)[0-9][0-9][0-9]\\-[0-9][0-9]\\-[0-9][0-9]$')
+
+    ])
   });
 
 
   constructor(
-    private readonly apiService: ApiService
-  ) { }
+    private readonly apiService: ApiService,
+    // public inputMask: Inputmask
+) { }
 
   // Add item method
   public addItem(): void {
@@ -44,9 +52,15 @@ export class AddComponent implements OnInit {
       this.dataSourceChange.emit(data);
       this.form.reset();
     });
+
+  }
+
+  public addMask(): void {
+    Inputmask('+7(999)999-99-99').mask(document.getElementById('phone'));
   }
 
   ngOnInit(): void {
+    this.addMask();
   }
 
 }
