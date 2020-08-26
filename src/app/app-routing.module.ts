@@ -3,6 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
+
+  {
+    path: '',
+    redirectTo: 'address-book',
+    pathMatch: 'full'
+  },
   {
     path: 'address-book',
     loadChildren: () => import('./modules/address-book/address-book.module').then(m => m.AddressBookModule)
