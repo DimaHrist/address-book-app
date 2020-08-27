@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 
 // Interfaces
-import {IRequest} from '../interfaces/request-interface';
-import {findIndex} from 'rxjs/operators';
+import {IMember} from '../interfaces/member-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class ApiService {
 
   constructor() { }
 
-  public addItem(request: IRequest): Observable<any> {
+  public addItem(request: IMember): Observable<any> {
     this.dataSource.push(request);
     return of(this.dataSource);
   }
@@ -25,14 +24,14 @@ export class ApiService {
   }
 
   public rateItem(value: boolean, id: number): Observable<any> {
-    const test = this.dataSource.find((item) => {
-      return this.dataSource.indexOf(item) === id;
+    const rateItem = this.dataSource.find((item, index) => {
+      return index === id;
     });
     if (value) {
-      this.dataSource.unshift({...test, rate: value});
+      this.dataSource.unshift({...rateItem, rate: value});
       this.dataSource.splice((id + 1), 1);
     } else {
-      this.dataSource.push({...test, rate: value});
+      this.dataSource.push({...rateItem, rate: value});
       this.dataSource.splice((id), 1);
     }
     return of(this.dataSource);

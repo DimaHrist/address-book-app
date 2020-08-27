@@ -7,7 +7,7 @@ import * as Inputmask from 'inputmask';
 import { ApiService } from '../../services/api.service';
 
 // Interfaces
-import { IRequest } from '../../interfaces/request-interface';
+import { IMember } from '../../interfaces/member-interface';
 
 @Component({
   selector: 'app-add',
@@ -16,7 +16,7 @@ import { IRequest } from '../../interfaces/request-interface';
 })
 export class AddComponent implements OnInit {
 
-  @Output() dataSourceChange = new EventEmitter<IRequest[]>();
+  @Output() dataSourceChange = new EventEmitter<IMember[]>();
 
   // Create form
   public form = new FormGroup({
@@ -25,7 +25,6 @@ export class AddComponent implements OnInit {
     patronymic: new FormControl(),
     phone: new FormControl(null, [
       Validators.required,
-      // Validators.pattern('^((\\\\+91-?)|0)?[0-9]{10}$')
       Validators.pattern('^\\+[7]\\([0-9][0-9][0-9]\\)[0-9][0-9][0-9]\\-[0-9][0-9]\\-[0-9][0-9]$')
 
     ])
@@ -34,12 +33,11 @@ export class AddComponent implements OnInit {
 
   constructor(
     private readonly apiService: ApiService,
-    // public inputMask: Inputmask
 ) { }
 
   // Add item method
   public addItem(): void {
-    const request: IRequest = {
+    const request: IMember = {
       rate: false,
       last_name: this.form.controls.lastName.value,
       first_name: this.form.controls.firstName.value,
@@ -47,7 +45,7 @@ export class AddComponent implements OnInit {
       phone: this.form.controls.phone.value
     };
 
-    this.apiService.addItem(request).subscribe((data: IRequest[]) => {
+    this.apiService.addItem(request).subscribe((data: IMember[]) => {
       this.dataSourceChange.emit(data);
       this.form.reset();
     });

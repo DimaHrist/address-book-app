@@ -1,4 +1,4 @@
-export interface IRequest {
+export interface IMember {
   rate: boolean;
   last_name: string;
   first_name: string;
